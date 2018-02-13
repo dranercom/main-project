@@ -1,21 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WalkScript : MonoBehaviour {
+public class AstronautScript : MonoBehaviour {
 
     public float speed = 3f;
     public bool moving;
+    public bool gazing;
     private CharacterController controller;
-    private GvrViewer gvrViewer;
     private Transform vrHead;
 
 	// Use this for initialization
 	void Start ()
     {
         controller = GetComponent<CharacterController>();
-        gvrViewer = transform.GetChild(0).GetComponent<GvrViewer>();
         vrHead = Camera.main.transform;
-        //GvrViewer.Instance.VRModeEnabled = !GvrViewer.Instance.VRModeEnabled;
         transform.GetChild(1).transform.GetChild(2).gameObject.AddComponent<FlareLayer>();
         transform.GetChild(1).transform.GetChild(3).gameObject.AddComponent<FlareLayer>();
     }
@@ -23,7 +21,7 @@ public class WalkScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !gazing)
         {
             moving = !moving;
         }
