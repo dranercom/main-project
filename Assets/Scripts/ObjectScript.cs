@@ -14,10 +14,13 @@ public class ObjectScript : MonoBehaviour
     public GameObject gvrObject;
 	// Use this for initialization
 	void Start () {
+        //Canvas element that displays the object type
         gvrObject = GameObject.Find("GvrObject");
-        astro_script = GameObject.FindGameObjectWithTag("Player").GetComponent<AstronautScript>();
         objectText = gvrObject.GetComponent<Text>();
         anim = gvrObject.GetComponent<Animator>();
+
+        //Movement script for the VR head
+        astro_script = GameObject.FindGameObjectWithTag("Player").GetComponent<AstronautScript>();
         audio_script = GameObject.Find("Main Camera").GetComponent<AudioScript>();
 		objType = gameObject.name;
 	}
@@ -34,13 +37,15 @@ public class ObjectScript : MonoBehaviour
 
     public void Gazing()
     {
-        if(message!="")
-            astro_script.gazing = true;
-        else
-            astro_script.gazing = false;
-        objectText.text = message;
+        astro_script.gazing = true;
+        objectText.text = objType;
         anim.Play("fade in");
-        objType = message;
+    }
+
+    public void NotGazing()
+    {
+        astro_script.gazing = false;
+        objectText.text = "";
     }
 
     public void DisplayInfo()

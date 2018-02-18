@@ -34,7 +34,10 @@ public class PopupUIController : MonoBehaviour
         //Debug.Log(hitInfo.collider.gameObject.name);
 		ObjectScript os = hitInfo.collider.gameObject.GetComponent<ObjectScript>();
 		if(os!=null)
-			os.DisplayInfo();
+        {
+            os.DisplayInfo();
+        }
+			
 
 
         //Canvas menu = popupUI;
