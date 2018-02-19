@@ -29,7 +29,7 @@ public class PopupUIController : MonoBehaviour
         Rigidbody selectedBody = hitInfo.rigidbody;
         // Make ui text
         Button[] buttons = popupUI.GetComponentsInChildren<Button>();
-        buttons[0].GetComponentInChildren<Text>().text = "Cuberman";
+        buttons[0].GetComponentInChildren<Text>().text = "DummyButton0";
         //buttons[0].guiText=
         //Debug.Log(hitInfo.collider.gameObject.name);
 		ObjectScript os = hitInfo.collider.gameObject.GetComponent<ObjectScript>();
@@ -43,10 +43,11 @@ public class PopupUIController : MonoBehaviour
         //Canvas menu = popupUI;
         if(!UIActive && hitInfo.collider.gameObject.name=="Cube")
         {
-            Vector3 menuPos = this.transform.position + (this.transform.forward * hitInfo.distance * frac) + (this.transform.right * hitInfo.distance * frac * 0.4f);
+            Vector3 menuPos = this.transform.position + (this.transform.forward * hitInfo.distance * frac) + (this.transform.right * hitInfo.distance * frac * 0.5f);
             Quaternion menuDir = Quaternion.LookRotation(menuPos - this.transform.position , this.transform.up);
             popupUI.transform.position = menuPos;
             popupUI.transform.rotation = menuDir;
+            popupUI.transform.localScale = new Vector3(hitInfo.distance*frac*0.5f, hitInfo.distance * frac*0.5f, 0.01f);
             //Instantiate(popupUI, menuPos, menuDir);
         }
 	}
