@@ -19,7 +19,7 @@ public class AstronautScript : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         if (Input.GetButtonDown("Fire1") && !gazing)
         {
@@ -32,5 +32,18 @@ public class AstronautScript : MonoBehaviour {
             controller.SimpleMove(speed*forward);
         }
         
-	}
+	}*/
+
+    private void Update()
+    {
+        float horizontal = Input.GetAxis("Vertical");
+        if (horizontal != 0)
+        {
+            Vector3 forward = vrHead.TransformDirection(Vector3.forward);
+            controller.SimpleMove(speed * forward * horizontal);
+            moving = true;
+        }
+        else
+            moving = false;
+    }
 }
