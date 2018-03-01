@@ -19,7 +19,10 @@ public class PopupUIController : MonoBehaviour
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        
+		if (!Input.GetButtonDown("Fire1"))
+		{
+			return;
+		}
         Vector3 originPos = this.transform.position;
         RaycastHit hitInfo;
         Physics.Raycast(originPos, this.transform.forward, out hitInfo);
@@ -31,12 +34,11 @@ public class PopupUIController : MonoBehaviour
         
         if (hitInfo.collider == null || hitInfo.collider.gameObject.name.Equals("Terrain"))
         {
+			if (popupUI.gameObject.activeInHierarchy)
+				popupUI.gameObject.SetActive (false);
             return;
         }
-        if (!Input.GetButtonDown("Fire1"))
-        {
-            return;
-        }
+        
         /*if (Input.GetButtonDown("Fire1") && (hitInfo.collider == null || hitInfo.collider.gameObject.name.Equals("Terrain")))
         {
             popupUI.gameObject.SetActive(false);
@@ -61,6 +63,7 @@ public class PopupUIController : MonoBehaviour
         // Make ui text
         Button[] buttons = popupUI.GetComponentsInChildren<Button>();
         buttons[0].GetComponentInChildren<Text>().text = "DummyButton0";
+		;
         //buttons[0].guiText=
         //Debug.Log(hitInfo.collider.gameObject.name);
 		ObjectScript os = hitInfo.collider.gameObject.GetComponent<ObjectScript>();
