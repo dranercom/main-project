@@ -120,7 +120,9 @@
     <Compile Include="Assets\GoogleVR\Scripts\Utilities\GvrIntent.cs" />
     <Compile Include="Assets\Scripts\AstronautScript.cs" />
     <Compile Include="Assets\Scripts\AudioScript.cs" />
+    <Compile Include="Assets\Scripts\BodyRotationScript.cs" />
     <Compile Include="Assets\Scripts\ButtonDescription.cs" />
+    <Compile Include="Assets\Scripts\HeadScript.cs" />
     <Compile Include="Assets\Scripts\ObjectScript.cs" />
     <Compile Include="Assets\Scripts\PopupUIController.cs" />
   </ItemGroup>
