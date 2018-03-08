@@ -10,9 +10,9 @@ public class HeadScript : MonoBehaviour {
 	void Start ()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera");
-        if (gameObject.name.Equals("Helmet"))
+        if (name.Equals("Helmet"))
             val = 1;
-        else if (gameObject.name.Equals("Body"))
+        else if (name.Equals("Body"))
             val = 0;
 
     }
@@ -20,7 +20,7 @@ public class HeadScript : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        
-            transform.rotation = new Quaternion(cam.transform.rotation.x*val, cam.transform.rotation.y, cam.transform.rotation.z*val, 1);
+        transform.rotation = new Quaternion(cam.transform.rotation.x*val, cam.transform.rotation.y, cam.transform.rotation.z*val, cam.transform.rotation.w);
+        //transform.rotation = cam.transform.rotation;
     }
 }

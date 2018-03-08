@@ -30,11 +30,6 @@ public class ObjectScript : MonoBehaviour
 	
 	}
 
-    public void increaseScale()
-    {
-        transform.localScale *= 2f;
-    }
-
     public void Gazing()
     {
         astro_script.gazing = true;

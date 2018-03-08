@@ -5,6 +5,7 @@ public class AstronautScript : MonoBehaviour {
 
     public float speed = 3f;
     public bool moving;
+    private Animator anim;
     public bool gazing;
     private CharacterController controller;
     private Transform vrHead;
@@ -16,6 +17,7 @@ public class AstronautScript : MonoBehaviour {
         vrHead = Camera.main.transform;
         transform.GetChild(1).transform.GetChild(2).gameObject.AddComponent<FlareLayer>();
         transform.GetChild(1).transform.GetChild(3).gameObject.AddComponent<FlareLayer>();
+        anim = transform.GetChild(2).transform.GetChild(0).GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -45,5 +47,10 @@ public class AstronautScript : MonoBehaviour {
         }
         else
             moving = false;
+    }
+
+    private void LateUpdate()
+    {
+        anim.SetBool("walking", moving);
     }
 }
