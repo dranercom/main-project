@@ -17,7 +17,7 @@ public class AstronautScript : MonoBehaviour {
         vrHead = Camera.main.transform;
         transform.GetChild(1).transform.GetChild(2).gameObject.AddComponent<FlareLayer>();
         transform.GetChild(1).transform.GetChild(3).gameObject.AddComponent<FlareLayer>();
-        anim = transform.GetChild(2).transform.GetChild(0).GetComponent<Animator>();
+        anim = transform.FindChild("AstroAvatar").FindChild("Body").GetComponent<Animator>();
     }
 
     // Update is called once per frame
