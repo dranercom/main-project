@@ -28,8 +28,8 @@ public class NetworkCharacter : Photon.MonoBehaviour
         else
         {
             // Network player, receive data
-            this.correctPlayerPos = (Vector3)stream.ReceiveNext();
-            this.correctPlayerRot = (Quaternion)stream.ReceiveNext();
+            correctPlayerPos = (Vector3)stream.ReceiveNext();
+            correctPlayerRot = (Quaternion)stream.ReceiveNext();
 
             myThirdPersonController myC = GetComponent<myThirdPersonController>();
             myC._characterState = (CharacterState)stream.ReceiveNext();

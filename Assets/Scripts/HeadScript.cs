@@ -9,7 +9,7 @@ public class HeadScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        cam = GameObject.FindGameObjectWithTag("MainCamera");
+        cam = transform.parent.transform.parent.FindChild("Main Camera").gameObject;
         if (name.Equals("Helmet"))
             val = 1;
         else if (name.Equals("Body"))
@@ -20,6 +20,8 @@ public class HeadScript : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate ()
     {
+        if (cam == null)
+            Start();
         transform.rotation = new Quaternion(cam.transform.rotation.x*val, cam.transform.rotation.y, cam.transform.rotation.z*val, cam.transform.rotation.w);
         //transform.rotation = cam.transform.rotation;
     }

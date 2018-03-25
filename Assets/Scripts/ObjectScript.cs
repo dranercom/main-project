@@ -26,8 +26,10 @@ public class ObjectScript : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+    {
+        if (gvrObject == null)
+            Start();
 	}
 
     public void Gazing()

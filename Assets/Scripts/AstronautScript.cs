@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AstronautScript : MonoBehaviour {
+public class AstronautScript : Photon.MonoBehaviour {
 
     public float speed = 3f;
     public bool moving;
@@ -13,16 +13,25 @@ public class AstronautScript : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+        
+        transform.FindChild("Main Camera").GetComponent<PopupUIController>().popupUI = GameObject.Find("PopupUI").GetComponent<Canvas>();
+
         controller = GetComponent<CharacterController>();
         vrHead = Camera.main.transform;
+        
         transform.GetChild(1).transform.GetChild(2).gameObject.AddComponent<FlareLayer>();
         transform.GetChild(1).transform.GetChild(3).gameObject.AddComponent<FlareLayer>();
         anim = transform.FindChild("AstroAvatar").FindChild("Body").GetComponent<Animator>();
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
+        if (!photonView.isMine)
+            return;*/
         if (Input.GetButtonDown("Fire1") && !gazing)
         {
             moving = !moving;
