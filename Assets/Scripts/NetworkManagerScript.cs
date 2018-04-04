@@ -3,7 +3,8 @@ using System.Collections;
 
 public class NetworkManagerScript : Photon.MonoBehaviour {
 
-    
+
+    public bool offline = true;
 
     private void Awake()
     {
@@ -12,7 +13,13 @@ public class NetworkManagerScript : Photon.MonoBehaviour {
 
     private void Start()
     {
-        PhotonNetwork.ConnectUsingSettings("v0.2");
+
+        PhotonNetwork.offlineMode = offline;
+        //if (offline)
+        //    PhotonNetwork.ConnectUsingSettings("v0.2");
+        //else
+        //    SpawnAstronaut();
+
     }
 
     private void OnGUI()
@@ -24,7 +31,10 @@ public class NetworkManagerScript : Photon.MonoBehaviour {
     void OnConnectedToMaster()
     {
         Debug.Log("Connected to Master :D");
-        PhotonNetwork.JoinLobby();
+        if(!offline)
+            PhotonNetwork.JoinLobby();
+        else
+            PhotonNetwork.JoinOrCreateRoom("common", null, null);
     }
 
     void OnConnectionFail()
@@ -40,6 +50,11 @@ public class NetworkManagerScript : Photon.MonoBehaviour {
 
     void OnJoinedRoom()
     {
+        SpawnAstronaut();
+    }
+
+    void SpawnAstronaut()
+    {
         GameObject astro = PhotonNetwork.Instantiate("Astronaut", Vector3.zero, Quaternion.identity, 0);
         astro.name = "Astronaut";
         astro.transform.GetChild(0).gameObject.SetActive(true);
@@ -50,7 +65,6 @@ public class NetworkManagerScript : Photon.MonoBehaviour {
 
         //astro.transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
         astro.GetComponent<AstronautScript>().enabled = true;
-        
     }
 
 }

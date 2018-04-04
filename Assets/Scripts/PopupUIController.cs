@@ -13,6 +13,7 @@ public class PopupUIController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+
         astroscript = GameObject.FindGameObjectWithTag("Player").GetComponent<AstronautScript>();
 	}
 	
@@ -63,7 +64,6 @@ public class PopupUIController : MonoBehaviour
         // Make ui text
         Button[] buttons = popupUI.GetComponentsInChildren<Button>();
         buttons[0].GetComponentInChildren<Text>().text = "DummyButton0";
-		;
         //buttons[0].guiText=
         //Debug.Log(hitInfo.collider.gameObject.name);
 		ObjectScript os = hitInfo.collider.gameObject.GetComponent<ObjectScript>();

@@ -37,6 +37,8 @@ public class ObjectScript : MonoBehaviour
         astro_script.gazing = true;
         objectText.text = objType;
         anim.Play("fade in");
+        if (objType[0] == 'L')
+            AudioSetter();
     }
 
     public void NotGazing()
@@ -56,6 +58,29 @@ public class ObjectScript : MonoBehaviour
                 break;
 
         }
+    }
+
+    public void AudioSetter()
+    {
+        if (!audio_script.audioSource.isPlaying)
+            audio_script.PlayClip(clip);
+        else
+            return;
+        if (objType.Split(' ')[0].Equals("Light"))
+        {
+            StartCoroutine(DimLights(GetComponent<Light>()));
+        }
+    }
+
+    IEnumerator DimLights(Light light)
+    {
+        while(light.intensity>0.1f)
+        {
+            light.intensity -= 0.1f;
+            yield return new WaitForSeconds(0.01f);
+        }
+        NotGazing();
+        Destroy(gameObject);
     }
 
 
