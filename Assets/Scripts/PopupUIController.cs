@@ -13,21 +13,24 @@ public class PopupUIController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-
         astroscript = GameObject.FindGameObjectWithTag("Player").GetComponent<AstronautScript>();
 	}
 	
 	// Update is called once per frame
 	void LateUpdate ()
     {
-		if (!Input.GetButtonDown("Fire1"))
+        if (/*!Input.GetButtonDown("Fire1") ||*/ astroscript.timeGazing<1)
 		{
+            //astroscript.gazing = false;
 			return;
 		}
+
         Vector3 originPos = this.transform.position;
         RaycastHit hitInfo;
         Physics.Raycast(originPos, this.transform.forward, out hitInfo);
-        if(astroscript.moving)
+
+        Debug.Log(hitInfo);
+        if (astroscript.moving)
         {
             popupUI.gameObject.SetActive(false);
             return;
@@ -37,6 +40,7 @@ public class PopupUIController : MonoBehaviour
         {
 			if (popupUI.gameObject.activeInHierarchy)
 				popupUI.gameObject.SetActive (false);
+
             return;
         }
         
@@ -85,4 +89,5 @@ public class PopupUIController : MonoBehaviour
             //Instantiate(popupUI, menuPos, menuDir);
         //}
 	}
+
 }

@@ -261,6 +261,8 @@
     <Compile Include="Assets\Scripts\NetworkManagerScript.cs" />
     <Compile Include="Assets\Scripts\ObjectScript.cs" />
     <Compile Include="Assets\Scripts\PopupUIController.cs" />
+    <Compile Include="Assets\Scripts\TakeOffScript.cs" />
+    <Compile Include="Assets\Scripts\magnetClick.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GoogleVR\Distortion\GvrDistortion.cginc" />

@@ -5,6 +5,7 @@ public class NetworkManagerScript : Photon.MonoBehaviour {
 
 
     public bool offline = true;
+    private GameObject astro;
 
     private void Awake()
     {
@@ -15,11 +16,18 @@ public class NetworkManagerScript : Photon.MonoBehaviour {
     {
 
         PhotonNetwork.offlineMode = offline;
-        //if (offline)
-        //    PhotonNetwork.ConnectUsingSettings("v0.2");
+        if (!offline)
+            PhotonNetwork.ConnectUsingSettings("v0.2");
         //else
         //    SpawnAstronaut();
+        
 
+    }
+
+    private void Update()
+    {
+        if (astro == null && offline)
+            SpawnAstronaut();
     }
 
     private void OnGUI()
@@ -39,7 +47,8 @@ public class NetworkManagerScript : Photon.MonoBehaviour {
 
     void OnConnectionFail()
     {
-        PhotonNetwork.Reconnect();
+         offline = true;
+         PhotonNetwork.Reconnect();
     }
 
     void OnJoinedLobby()
@@ -55,16 +64,18 @@ public class NetworkManagerScript : Photon.MonoBehaviour {
 
     void SpawnAstronaut()
     {
-        GameObject astro = PhotonNetwork.Instantiate("Astronaut", Vector3.zero, Quaternion.identity, 0);
+        astro = PhotonNetwork.Instantiate("Astronaut", Vector3.zero, Quaternion.identity, 0);
         astro.name = "Astronaut";
         astro.transform.GetChild(0).gameObject.SetActive(true);
         astro.transform.GetChild(1).gameObject.SetActive(true);
         astro.transform.GetChild(2).GetChild(1).GetChild(1).gameObject.SetActive(true);
         astro.transform.GetChild(2).GetChild(0).GetComponent<HeadScript>().enabled = true;
         astro.transform.GetChild(2).GetChild(1).GetComponent<HeadScript>().enabled = true;
+        astro.transform.GetChild(2).GetChild(1).GetChild(2).gameObject.SetActive(false);
+        astro.transform.GetChild(2).GetChild(1).GetChild(3).gameObject.SetActive(false);
 
-        //astro.transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
-        astro.GetComponent<AstronautScript>().enabled = true;
+       //astro.transform.GetChild(2).transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+       astro.GetComponent<AstronautScript>().enabled = true;
     }
 
 }
