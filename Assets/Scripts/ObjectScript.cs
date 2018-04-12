@@ -99,7 +99,7 @@ public class ObjectScript : MonoBehaviour
                 audio_script.PlayClip(clip);
                 break;
             case "Door":
-                SceneManager.LoadSceneAsync(1);
+                SceneManager.LoadSceneAsync("EarthTakeoff");
                 break;
             case "Audio":
                 audio_script.PlayClip(clip);
@@ -113,7 +113,11 @@ public class ObjectScript : MonoBehaviour
             case "Apollo11":
             case "Apollo15":
             case "Apollo12":
+            case "Moon":
                 SceneManager.LoadSceneAsync("Apollo 12");
+                break;
+            case "Tutorial":
+                SceneManager.LoadScene("Tutorial");
                 break;
 
         }

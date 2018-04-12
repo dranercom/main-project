@@ -12,7 +12,8 @@ public class AstronautScript : Photon.MonoBehaviour {
     public Transform vrHead;
     public Slider timeSlider;
     public float timeGazing;
-    public float maxScale = 0.08f;
+    public float maxScale = 0.1f;
+    public float minScale = 0.04f;
     public Image picImage;
     public magneticClick magClick = new magneticClick();
     public bool movementEnabled = true;
@@ -46,7 +47,7 @@ public class AstronautScript : Photon.MonoBehaviour {
         if (!photonView.isMine)
             return;*/
 
-        timeSlider.value = timeGazing / 1;
+        timeSlider.value = timeGazing;
 
         if (gazing && timeGazing <= 1)
         {
@@ -57,15 +58,13 @@ public class AstronautScript : Photon.MonoBehaviour {
             }
             timeGazing += Time.deltaTime;
 
-            timeSlider.gameObject.transform.localScale = new Vector3(timeGazing * maxScale, timeGazing * maxScale, timeGazing * maxScale);
+            timeSlider.gameObject.transform.localScale = Vector3.one * timeGazing * maxScale;
         }
 
         if(!gazing)
         {
             timeGazing = 0;
-            timeSlider.gameObject.transform.localScale *= 0;
-            if (timeSlider.gameObject.activeInHierarchy)
-                timeSlider.gameObject.SetActive(false);
+            timeSlider.gameObject.transform.localScale = Vector3.one*minScale;
         }
 
         if (!gazing && (Input.GetButtonDown("Fire1") || magClick.clicked()) && movementEnabled)
